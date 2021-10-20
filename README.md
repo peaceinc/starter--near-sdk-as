@@ -1,3 +1,7 @@
+# NCD L1 Submission
+
+This is essentially a clone of the starter--near-sdk-as repo from Learn-NEAR, with changes only to ./src/simple/assembly/index.ts. A call to the contract 'GetMagicWords', passing in an integer in 'wordcount' will return an array of random words with the specified size. Requires a deposit of at least 100000 yoctonear.
+
 # `near-sdk-as` Starter Kit
 
 This is a good project to use as a starting point for your AssemblyScript project.
