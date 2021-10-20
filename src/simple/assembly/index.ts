@@ -1,8 +1,27 @@
-import { storage, Context } from "near-sdk-as"
+import { storage, Context, RNG, logging, u128 } from "near-sdk-as"
 
-// return the string 'hello world'
-export function helloWorld(): string {
-  return 'hello world'
+
+let words: Array<string> = ['cannabis','cloaked','leah','sprinkles','fantasy','soil','laundry','effect','mail','generate','production','trust','hair','tune','fair','manual','apparatus','set','enjoy','unpleasant','fame','paralyzed','auditor','acid','rib','applied','glimpse','show’,’directory','missile','fossil','sheet','review','curtain','outlet','moving','reform','memorial','gown','institution','evoke','sit','laborer','intention','contact','college','overlook','user','fish','have','enter','throw','fascinate','calendar','clashstructure','partnership','wording','provide','figure','family','stake','vague','excitement','rally','bread','volunteer','ex','linger','fork','context','grant','lazy','rider','strip','ancestor','stress','weakness','disgrace','mouse','rank','belief','match','conceive','memorandum','club','history','rubbish','reservoir','origin','wonder','us','publication','difference','intensify','flatware','camera','breakdown','banish']
+
+
+export function GetMagicWords(wordcount: u8): string {
+  const rng = new RNG<u32>(1, u32.MAX_VALUE);
+  let magic: u32[] = []
+  for (let i: u8 = 0; i < wordcount; i++) {
+    magic.push(rng.next()%words.length);
+  }
+  const roll = rng.next()%words.length;
+  //let wordsout: Array<string> = []
+  
+  //logging.log(magic)
+  
+  const paid: u128 = Context.attachedDeposit
+  if (paid > u128.from(100000)) {
+    return "your words of the day are:" + magic.map<string>((num:u32):string => words[num]).join(', ')
+  }
+  else{
+    return "more money plz"
+  }
 }
 
 // read the given key from account (contract) storage
